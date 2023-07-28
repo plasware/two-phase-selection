@@ -118,7 +118,7 @@ if __name__ == '__main__':
     test_path = ""
     test_res = np.load(test_path, allow_pickle = True).item()
 
-    #3.For every model and every dataset, get the Successive_halving results
+    #2.For every model and every dataset, get the Successive_halving results
     sh_results = filter_models_sh(test_res,val_res)
 
     #3.For every model and every dataset, get the Fine-Selection results
