@@ -21,10 +21,6 @@ elif args.task == "boolq":
     with open('leep_score_boolq.txt', 'r') as f:
         lines = f.readlines()
         leep = lines[1].split('\t')
-elif args.task == "copa":
-    with open('leep_score_copa.txt', 'r') as f:
-        lines = f.readlines()
-        leep = lines[1].split('\t')
 elif args.task == "multirc":
     with open('leep_score_multirc.txt', 'r') as f:
         lines = f.readlines()

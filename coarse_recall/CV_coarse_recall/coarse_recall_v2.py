@@ -6,23 +6,15 @@ import math
 import argparse
 
 parser = argparse.ArgumentParser(description="set task")
-parser.add_argument('--task', type=str, default="snacks", help='name of a huggingface dataset')
+parser.add_argument('--task', type=str, default="xray", help='name of a huggingface dataset')
 args = parser.parse_args()
 
-if args.task == "birds":
-    with open('leep_score_birds.txt', 'r') as f:
-        lines = f.readlines()
-        leep = lines[1].split('\t')
-elif args.task == "medmnist":
+if args.task == "medmnist":
     with open('leep_score_medmnist.txt', 'r') as f:
         lines = f.readlines()
         leep = lines[1].split('\t')
 elif args.task == "beans":
     with open('leep_score_beans.txt', 'r') as f:
-        lines = f.readlines()
-        leep = lines[1].split('\t')
-elif args.task == "snacks":
-    with open('leep_score_snacks.txt', 'r') as f:
         lines = f.readlines()
         leep = lines[1].split('\t')
 elif args.task == "flowers":

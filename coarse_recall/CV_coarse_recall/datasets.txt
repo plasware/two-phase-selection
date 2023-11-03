@@ -1,0 +1,6 @@
+food101
+Matthijs/snacks
+alkzar90/CC6204-Hackaton-Cub-Dataset
+cats_vs_dogs
+cifar10
+mnist

@@ -1,7 +1,6 @@
 import sys
 import math
 
-import numpy
 import numpy as np
 import os
 import random
@@ -18,8 +17,8 @@ class Model_Clustering:
     min_dataset_scores = []
 
     def __init__(self):
-        self.datasets = [line.strip() for line in open('datasets_v4.txt').readlines()]
-        lines = open('matrix_v4.txt').readlines()
+        self.datasets = [line.strip() for line in open('datasets.txt').readlines()]
+        lines = open('matrix.txt').readlines()
         self.models = [line.strip() for line in lines[0].split('\t')]
         self.model_scores = []
 
@@ -180,9 +179,6 @@ class Model_Clustering:
             for j in range(i):
                 model_score_x = self.model_scores[i]
                 model_score_y = self.model_scores[j]
-                #_x = np.array(model_score_x)
-                #_y = np.array(model_score_y)
-                # distance_matrix[i][j] = distance_matrix[j][i] = np.linalg.norm(_x - _y)
                 distance_matrix[i][j] = distance_matrix[j][i] = self.sim_score_by_max_avg_error(model_score_x, model_score_y)
         #print(distance_matrix)
 
@@ -218,54 +214,6 @@ class Model_Clustering:
         print("silhouette_coefficient: %s" % str(sc_result))
         return sc_result
 
-    def cluster_model_similarity(self):
-        avg_cluster_similarity = 0
-        cnt = 0
-        for model_score in self.model_scores:
-            model_score_norm = (np.array(model_score) - np.array(self.min_dataset_scores)) / (
-                                    np.array(self.max_dataset_scores) - np.array(self.min_dataset_scores))
-            self.model_scores_norm.append(model_score_norm)
-        #print(self.model_scores_norm)
-        with open("model_scores_norm.txt", "w") as f:
-            for score_norm in self.model_scores_norm:
-                norm = []
-                for score in score_norm:
-                    norm.append(str(score))
-                str_norm = "\t".join(norm) + "\n"
-                f.write(str_norm)
-
-        for cluster in self.model_clusters:
-            if len(cluster) > 1:
-                similarities = []
-                for i in range(len(cluster)):
-                    for j in range(i):
-                        similarity = self.sim_score_by_max_avg_error(self.model_scores[cluster[i]], self.model_scores[cluster[j]])
-                        similarities.append(similarity)
-                similarity_avg = 1 - np.mean(np.array(similarities))
-                avg_cluster_similarity += similarity_avg
-                cnt += 1
-                print("cluster similarity: %s" % str(similarity_avg))
-        avg_cluster_similarity = avg_cluster_similarity / cnt
-        print("average cluster similarity: %s" % str(avg_cluster_similarity))
-
-    def cluster_model_similarity_test(self):
-        for cluster in self.model_clusters:
-            if len(cluster) > 1:
-                similarities = []
-                for i in range(len(cluster)):
-                    for j in range(i):
-                        max_avg_error = self.sim_score_by_max_avg_error(self.model_scores[cluster[i]], self.model_scores[cluster[j]])
-                        similarity = 1 - max_avg_error
-                        similarities.append(similarity)
-                similarity_avg = np.mean(np.array(similarities))
-                print("cluster similarity: %s" % str(similarity_avg))
-
-    def cluster_model_similarity_k_means(self):
-        _ = self.model_clusters
-        self.model_clusters = self.model_clusters_k_means
-        self.cluster_model_similarity()
-        self.model_clusters = _
-
     def silhouette_coefficient_k_means(self):
         # calculate silhouette coefficient of k_means result
         _ = self.model_clusters
@@ -276,11 +224,8 @@ class Model_Clustering:
 if __name__ == '__main__':
     model_cluster_instance = Model_Clustering()
     model_cluster_instance.do_cluster()
-    #model_cluster_instance.cluster_model_similarity()
     model_cluster_instance.silhouette_coefficient()
-    #model_cluster_instance.cluster_model_similarity_test()
     print('##############################')
     model_cluster_instance.do_k_means_cluster()
-    #model_cluster_instance.cluster_model_similarity_k_means()
     model_cluster_instance.silhouette_coefficient_k_means()
 
