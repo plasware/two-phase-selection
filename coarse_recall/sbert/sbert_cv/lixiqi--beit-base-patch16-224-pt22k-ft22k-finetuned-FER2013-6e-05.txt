@@ -1,0 +1,5 @@
+beit-base-patch16-224-pt22k-ft22k-finetuned-FER2013-6e-05
+This model is a fine-tuned version of microsoft/beit-base-patch16-224-pt22k-ft22k on the image_folder dataset. It achieves the following results on the evaluation set:
+
+Loss: 0.8551
+Accuracy: 0.6863

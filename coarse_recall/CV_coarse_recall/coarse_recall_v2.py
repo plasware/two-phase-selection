@@ -6,7 +6,7 @@ import math
 import argparse
 
 parser = argparse.ArgumentParser(description="set task")
-parser.add_argument('--task', type=str, default="beans", help='name of a huggingface dataset')
+parser.add_argument('--task', type=str, default="snacks", help='name of a huggingface dataset')
 args = parser.parse_args()
 
 if args.task == "birds":
@@ -19,6 +19,18 @@ elif args.task == "medmnist":
         leep = lines[1].split('\t')
 elif args.task == "beans":
     with open('leep_score_beans.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "snacks":
+    with open('leep_score_snacks.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "flowers":
+    with open('leep_score_flowers.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "xray":
+    with open('leep_score_xray.txt', 'r') as f:
         lines = f.readlines()
         leep = lines[1].split('\t')
 #print(leep)
@@ -87,5 +99,5 @@ while selected_cnt > 0:
     proxy_score_none_singleton[max_idx] *= -1
 
 result = ','.join(recall_idx)
-with open(args.task + "_recall_result.txt", "w") as f:
+with open(args.task + "_recall_result_v2.txt", "w") as f:
     f.write(result)

@@ -6,7 +6,7 @@ import math
 import argparse
 
 parser = argparse.ArgumentParser(description="set task")
-parser.add_argument('--task', type=str, default="mnli", help='name of a huggingface dataset')
+parser.add_argument('--task', type=str, default="multirc", help='name of a huggingface dataset')
 args = parser.parse_args()
 
 if args.task == "mnli":
@@ -15,6 +15,18 @@ if args.task == "mnli":
         leep = lines[1].split('\t')
 elif args.task == "tweet":
     with open('leep_score_tweet.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "boolq":
+    with open('leep_score_boolq.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "copa":
+    with open('leep_score_copa.txt', 'r') as f:
+        lines = f.readlines()
+        leep = lines[1].split('\t')
+elif args.task == "multirc":
+    with open('leep_score_multirc.txt', 'r') as f:
         lines = f.readlines()
         leep = lines[1].split('\t')
 #print(leep)
