@@ -1,6 +1,7 @@
 # two-phase-selection
 
 Code of the paper "A Two-Phase Recall-and-Select Framework for Fast Model Selection". Two phases refers to coarse recall and fine selection.
+The file tech-report-137.pdf is the appendix of our paper.
 
 ## Coarse-Recall
 
